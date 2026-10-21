@@ -1,0 +1,17 @@
+{
+  "name": "hola-mundo-node",
+  "version": "1.0.0",
+  "description": "Proyecto Hola Mundo con Node.js y Docker",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node --watch index.js"
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "keywords": ["node", "docker", "hola-mundo"],
+  "author": "Tu Nombre",
+  "license": "MIT"
+}

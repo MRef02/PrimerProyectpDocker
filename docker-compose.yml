@@ -1,0 +1,25 @@
+services:
+  hola-mundo:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: hola-mundo-node
+    image: hola-mundo-node:latest
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+      - PORT=3000
+    volumes:
+      # Hot reload: montamos src/ dentro del contenedor
+      - ./src:/app
+      - /app/node_modules
+    working_dir: /app
+    command: ["node", "--watch", "index.js"]
+    restart: unless-stopped
+    networks:
+      - hola-net
+
+networks:
+  hola-net:
+    driver: bridge
