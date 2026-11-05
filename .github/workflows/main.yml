@@ -9,6 +9,8 @@ env:
   AWS_REGION: us-east-1
   ECR_REGISTRY: 357199110359.dkr.ecr.us-east-1.amazonaws.com
   ECR_REPOSITORY: primerproyectpdocker
+  ECS_CLUSTER: primerproyecto-fargate-cluster
+  ECS_SERVICE: primerproyecto-fargate-service
 
 jobs:
   build-and-push:
@@ -34,3 +36,7 @@ jobs:
         run: |
           docker build --provenance=false -t $ECR_REGISTRY/$ECR_REPOSITORY:latest -f dockerfile .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
+
+      - name: Force new deployment in Amazon ECS
+        run: |
+          aws ecs update-service --cluster $ECS_CLUSTER --service $ECS_SERVICE --force-new-deployment --region $AWS_REGION
